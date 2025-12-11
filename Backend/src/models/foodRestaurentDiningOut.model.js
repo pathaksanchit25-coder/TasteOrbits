@@ -50,6 +50,11 @@ const foodRestaurantDiningOut = new mongoose.Schema({
         type: String,
         required: true
     },
+    contactNumber: {
+        type: String,
+        required: true,
+        trim: true
+    }
 }, {
     timestamps: true
 });

@@ -10,6 +10,8 @@ import Generalpage from '../Pages/Generalpage'
 import Restaurantpage from '../Pages/Restaurantpage'
 import Deliverypage from '../Pages/Deliverypage'
 import PartnerDashboardCreate from '../Pages/PartnerDashboardCreate'
+import RestaurantAdd from '../Pages/RestaurantAdd'
+import Restaurantviewpage from '../Pages/Restaurantviewpage'
 
 const AuthRoutes = () => {
   return (
@@ -23,16 +25,15 @@ const AuthRoutes = () => {
 
       {/* Dynamic city + tab routes */}
       <Route path='/city/:city/:tab' element={<Generalpage />} />
-      <Route path='/city/:city/restaurants' element={<Restaurantpage/>} />
-      {/* <Route path='/city/:city/delivery' element={<Deliverypage/>} /> */}
+      <Route path='/city/:city/restaurants' element={<Restaurantpage />} />
 
-      {/* Routing for partner to create restaurant canrd or adding delivery */}
+      {/* Adding and viewing restaurant page*/}
+      <Route path='/partner/restaurant/add' element={<RestaurantAdd />} />
+      <Route path = '/partner/restaurant/view' element= {<Restaurantviewpage />}/>
 
-      {/* <Route path='/partner/addDelivery' element={<AddDeliveryPartner/>} /> */}
-      
     </Routes>
 
-    
+
 
 
   )

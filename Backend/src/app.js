@@ -11,6 +11,7 @@ const foodPartnerUpdateRoute = require('./routes/foodPartnerUpdate.routes');
 const foodDeliveryUpdateRoute = require('./routes/foodDeliveryUpdate.routes');
 const foodRestaurantUpdateRoute = require('./routes/foodRestaurantUpdate.routes');
 const foodPartnerDashboardRoutes = require('./routes/foodPartnerDashboard.routes');
+const foodRestaurantCardDataRoutes = require('./routes/foodRestaurantCardData.routes');
 
 const cookieParser = require('cookie-parser');
 
@@ -33,6 +34,7 @@ app.use('/api/new',foodPartnerUpdateRoute);
 app.use('/api/new',foodDeliveryUpdateRoute);
 app.use('/api/new',foodRestaurantUpdateRoute);
 app.use('/api/foodpartner',foodPartnerDashboardRoutes);
+app.use('/api/restaurantData',foodRestaurantCardDataRoutes);
 
 
 module.exports = app;

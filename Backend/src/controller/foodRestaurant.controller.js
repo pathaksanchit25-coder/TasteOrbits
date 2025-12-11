@@ -15,7 +15,7 @@ async function foodRestaurantAdd(req, res) {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const { name, address, averageCostForTwo, imageUrl, foodPartnerId, cuisineType, rating, openingTime,city } = req.body;
+        const { name, address, averageCostForTwo, imageUrl, foodPartnerId, cuisineType, rating, openingTime,city,contactNumber } = req.body;
 
         const foodRestaurant = await foodRestaurantModel.create({
             name,
@@ -26,7 +26,8 @@ async function foodRestaurantAdd(req, res) {
             cuisineType,
             rating,
             openingTime,
-            city
+            city,
+            contactNumber
         });
 
         return res.status(201).json({

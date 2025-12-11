@@ -15,9 +15,8 @@ const Navbar = () => {
   const [filteredCities, setFilteredCities] = useState([]);
 
   const navigate = useNavigate();
-  const { city, tab } = useParams(); // 👈 get city and tab from URL
+  const { city, tab } = useParams();
 
-  // Determine active tab from URL param
   const activeTab = tab?.toLowerCase() === "delivery" ? "Delivery" : "Restaurants";
 
   const handleSearchChange = (e) => {
@@ -39,12 +38,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="top-0 left-0 w-full bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-md z-50">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col gap-4">
+    <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 backdrop-blur-lg border-b border-white/20 shadow-lg z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+        
         {/* Top Row */}
         <div className="flex items-center justify-between">
           {/* Nav Links */}
-          <ul className="hidden md:flex gap-8 text-white font-medium">
+          <ul className="hidden md:flex gap-8 text-white font-semibold tracking-wide">
             <li><Link to="/" className="hover:text-red-400 transition">Home</Link></li>
             <li><Link to="/partners" className="hover:text-red-400 transition">Partners</Link></li>
             <li><Link to="/about" className="hover:text-red-400 transition">About</Link></li>
@@ -60,7 +60,7 @@ const Navbar = () => {
               className="w-full px-4 py-2 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400"
             />
             {filteredCities.length > 0 && (
-              <ul className="absolute left-0 right-0 mt-2 bg-gray-900/80 backdrop-blur-lg border border-white/20 rounded-lg shadow-lg text-white max-h-60 overflow-y-auto z-50">
+              <ul className="absolute left-0 right-0 mt-2 bg-gray-900/90 backdrop-blur-lg border border-white/20 rounded-lg shadow-xl text-white max-h-60 overflow-y-auto z-50">
                 {filteredCities.map((c) => (
                   <li
                     key={c}
@@ -81,7 +81,7 @@ const Navbar = () => {
           {/* Auth Buttons */}
           <div className="hidden md:flex gap-4">
             <Link to="/login" className="px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition">Log In</Link>
-            <Link to="/register" className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition">Sign Up</Link>
+            <Link to="/register" className="px-4 py-2 rounded-lg bg-red-500 text-white font-semibold shadow-md hover:bg-red-600 transition">Sign Up</Link>
           </div>
 
           {/* Mobile Menu Icon */}
@@ -100,21 +100,17 @@ const Navbar = () => {
           <div className="flex justify-center md:justify-end gap-6 md:flex-1">
             <button
               onClick={() => handleTabClick("Restaurants")}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full transition ${
-                activeTab === "Restaurants"
-                  ? "bg-red-500 text-white shadow-md"
-                  : "bg-white/10 border border-white/20 text-gray-300 hover:bg-white/20"
-              }`}
+              className={`flex items-center gap-2 px-5 py-2 rounded-full transition ${activeTab === "Restaurants"
+                ? "bg-red-500 text-white shadow-md"
+                : "bg-white/10 border border-white/20 text-gray-300 hover:bg-white/20"}`}
             >
               <i className="ri-restaurant-line text-lg"></i> Restaurants
             </button>
             <button
               onClick={() => handleTabClick("Delivery")}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full transition ${
-                activeTab === "Delivery"
-                  ? "bg-red-500 text-white shadow-md"
-                  : "bg-white/10 border border-white/20 text-gray-300 hover:bg-white/20"
-              }`}
+              className={`flex items-center gap-2 px-5 py-2 rounded-full transition ${activeTab === "Delivery"
+                ? "bg-red-500 text-white shadow-md"
+                : "bg-white/10 border border-white/20 text-gray-300 hover:bg-white/20"}`}
             >
               <i className="ri-motorbike-line text-lg"></i> Delivery
             </button>
@@ -123,7 +119,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-gray-900/80 backdrop-blur-lg border-t border-white/20 px-6 py-4 rounded-lg">
+          <div className="md:hidden bg-gray-900/90 backdrop-blur-lg border-t border-white/20 px-6 py-4 rounded-lg shadow-lg">
             <ul className="flex flex-col gap-4 text-white font-medium">
               <li><Link to="/" className="hover:text-red-400 transition">Home</Link></li>
               <li><Link to={`/city/${city}/restaurants`} className="hover:text-red-400 transition">Restaurants</Link></li>
