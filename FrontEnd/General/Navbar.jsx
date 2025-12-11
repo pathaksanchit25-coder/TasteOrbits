@@ -38,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 backdrop-blur-lg border-b border-white/20 shadow-lg z-50">
+    <nav className="w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 backdrop-blur-lg border-b border-white/20 shadow-lg z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
         
         {/* Top Row */}

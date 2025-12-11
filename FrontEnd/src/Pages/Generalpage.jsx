@@ -9,7 +9,7 @@ const Generalpage = () => {
   return (
     <div>
       <Navbar selectedCity={city} selectedTab = {tab} />
-
+      
     </div>
   )
 }
