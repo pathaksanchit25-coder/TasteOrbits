@@ -8,8 +8,9 @@ const createDeliveryRoute = require('./routes/foodDeliveryAdd.routes');
 const createRestaurantRoute = require('./routes/foodRestaurantAdd.routes');
 const userUpdateRoute = require('./routes/userUpdate.routes');
 const foodPartnerUpdateRoute = require('./routes/foodPartnerUpdate.routes');
-const foodDeliveryUpdateRoute = require('./routes/foodDeliveryUpdate.routes')
-const foodRestaurantUpdateRoute = require('./routes/foodRestaurantUpdate.routes')
+const foodDeliveryUpdateRoute = require('./routes/foodDeliveryUpdate.routes');
+const foodRestaurantUpdateRoute = require('./routes/foodRestaurantUpdate.routes');
+const foodPartnerDashboardRoutes = require('./routes/foodPartnerDashboard.routes');
 
 const cookieParser = require('cookie-parser');
 
@@ -31,6 +32,7 @@ app.use('/api/new',userUpdateRoute);
 app.use('/api/new',foodPartnerUpdateRoute);
 app.use('/api/new',foodDeliveryUpdateRoute);
 app.use('/api/new',foodRestaurantUpdateRoute);
+app.use('/api/foodpartner',foodPartnerDashboardRoutes);
 
 
 module.exports = app;
