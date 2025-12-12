@@ -52,7 +52,7 @@ const majorCities = [
 
   // Other Capitals
   "Dehradun", "Gangtok", "Port Blair", "Pondicherry", "Chandigarh"
-];;
+];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

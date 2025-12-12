@@ -1,6 +1,6 @@
 // AuthRoutes.jsx
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from '../../General/Home'
 import RegisterUser from '../Auth/RegisterUser'
 import LoginUser from '../Auth/LoginUser'
@@ -12,6 +12,7 @@ import Deliverypage from '../Pages/Deliverypage'
 import PartnerDashboardCreate from '../Pages/PartnerDashboardCreate'
 import RestaurantAdd from '../Pages/RestaurantAdd'
 import Restaurantviewpage from '../Pages/Restaurantviewpage'
+import RegisteredUserPage from '../Pages/RegisteredUserPage'
 
 const AuthRoutes = () => {
   return (
@@ -29,13 +30,12 @@ const AuthRoutes = () => {
 
       {/* Adding and viewing restaurant page*/}
       <Route path='/partner/restaurant/add' element={<RestaurantAdd />} />
-      <Route path = '/partner/restaurant/view' element= {<Restaurantviewpage />}/>
+      <Route path='/partner/restaurant/view' element={<Restaurantviewpage />} />
 
+      {/* User routes */}
+      <Route path='/user' element={<Navigate to="/user/Mumbai" replace />} /> {/* ✅ Default redirect */}
+      <Route path='/user/:city' element={<RegisteredUserPage />} />
     </Routes>
-
-
-
-
   )
 }
 
