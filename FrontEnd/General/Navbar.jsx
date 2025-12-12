@@ -3,11 +3,56 @@ import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const majorCities = [
-  "Mumbai", "Delhi", "Bengaluru", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad",
-  "Jaipur", "Surat", "Lucknow", "Kanpur", "Nagpur", "Indore", "Thane", "Bhopal", "Visakhapatnam",
-  "Patna", "Vadodara", "Ghaziabad", "Ludhiana", "Agra", "Nashik", "Faridabad", "Meerut",
-  "Rajkot", "Varanasi", "Srinagar", "Aurangabad", "Dhanbad", "Amritsar", "Allahabad", "Jabalpur"
-];
+  // Tier-1 Metros
+  "Mumbai", "Delhi", "Banglore", "Hyderabad", "Chennai", "Kolkata", "Pune", "Ahmedabad",
+
+  // Rajasthan
+  "Jaipur", "Udaipur", "Jodhpur", "Kota",
+
+  // Karnataka
+  "Bengaluru", "Mysuru", "Mangalore", "Hubli",
+
+  // Uttar Pradesh
+  "Lucknow", "Kanpur", "Varanasi", "Agra", "Noida", "Ghaziabad", "Meerut", "Prayagraj",
+
+  // Madhya Pradesh
+  "Bhopal", "Indore", "Jabalpur", "Gwalior",
+
+  // Maharashtra
+  "Nagpur", "Nashik", "Aurangabad", "Thane",
+
+  // Punjab
+  "Chandigarh", "Amritsar", "Ludhiana", "Patiala",
+
+  // Gujarat
+  "Surat", "Vadodara", "Rajkot", "Bhavnagar",
+
+  // Bihar & Jharkhand
+  "Patna", "Gaya", "Muzaffarpur", "Ranchi", "Jamshedpur", "Dhanbad",
+
+  // Odisha & Chhattisgarh
+  "Bhubaneswar", "Cuttack", "Rourkela", "Raipur", "Bilaspur",
+
+  // West Bengal & North-East
+  "Kolkata", "Siliguri", "Darjeeling", "Guwahati", "Shillong", "Imphal", "Aizawl", "Agartala", "Kohima", "Itanagar",
+
+  // Tamil Nadu & Kerala
+  "Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem",
+  "Thiruvananthapuram", "Kochi", "Kozhikode",
+
+  // Haryana & Himachal
+  "Faridabad", "Gurgaon", "Panipat", "Hisar",
+  "Shimla", "Solan", "Dharamshala",
+
+  // Jammu & Kashmir, Ladakh
+  "Srinagar", "Jammu", "Leh", "Kargil",
+
+  // Andhra Pradesh & Telangana
+  "Hyderabad", "Warangal", "Vijayawada", "Visakhapatnam", "Tirupati",
+
+  // Other Capitals
+  "Dehradun", "Gangtok", "Port Blair", "Pondicherry", "Chandigarh"
+];;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,7 +85,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-gradient-to-r from-gray-900 via-black to-gray-800 backdrop-blur-lg border-b border-white/20 shadow-lg z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
-        
+
         {/* Top Row */}
         <div className="flex items-center justify-between">
           {/* Nav Links */}
@@ -93,7 +138,7 @@ const Navbar = () => {
         {/* Breadcrumb + Toggle Row */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm text-white">
           <div className="text-gray-300 md:flex-1">
-            <Link to='/'>Home</Link> / <Link to='/'>India</Link> / 
+            <Link to='/'>Home</Link> / <Link to='/'>India</Link> /
             <span className="text-white font-semibold">{city} {activeTab}</span>
           </div>
 

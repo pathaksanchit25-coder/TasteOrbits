@@ -1,106 +1,90 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../General/Navbar";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const RestaurantPage = () => {
-  // Sample static restaurant data with contact numbers
-  const [restaurants] = useState([
-    {
-      name: "Spice Garden",
-      address: "Sector 5, Panvel",
-      city: "Panvel",
-      cuisines: "Indian, Chinese",
-      avgCost: "₹800",
-      rating: 4.3,
-      openingTimes: "11:00 AM - 11:00 PM",
-      contactNo: "+91 98765 43210",
-      image: "https://images.unsplash.com/photo-1765202665764-ca839162fe4a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-     {
-      name: "Spice Garden",
-      address: "Sector 5, Panvel",
-      city: "Panvel",
-      cuisines: "Indian, Chinese",
-      avgCost: "₹800",
-      rating: 4.3,
-      openingTimes: "11:00 AM - 11:00 PM",
-      contactNo: "+91 98765 43210",
-      image: "https://images.unsplash.com/photo-1765202665764-ca839162fe4a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-     {
-      name: "Spice Garden",
-      address: "Sector 5, Panvel",
-      city: "Panvel",
-      cuisines: "Indian, Chinese",
-      avgCost: "₹800",
-      rating: 4.3,
-      openingTimes: "11:00 AM - 11:00 PM",
-      contactNo: "+91 98765 43210",
-      image: "https://images.unsplash.com/photo-1765202665764-ca839162fe4a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-     {
-      name: "Spice Garden",
-      address: "Sector 5, Panvel",
-      city: "Panvel",
-      cuisines: "Indian, Chinese",
-      avgCost: "₹800",
-      rating: 4.3,
-      openingTimes: "11:00 AM - 11:00 PM",
-      contactNo: "+91 98765 43210",
-      image: "https://images.unsplash.com/photo-1765202665764-ca839162fe4a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-     {
-      name: "Spice Garden",
-      address: "Sector 5, Panvel",
-      city: "Panvel",
-      cuisines: "Indian, Chinese",
-      avgCost: "₹800",
-      rating: 4.3,
-      openingTimes: "11:00 AM - 11:00 PM",
-      contactNo: "+91 98765 43210",
-      image: "https://images.unsplash.com/photo-1765202665764-ca839162fe4a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      name: "Urban Tandoor",
-      address: "MG Road, Pune",
-      city: "Pune",
-      cuisines: "North Indian, Mughlai",
-      avgCost: "₹1200",
-      rating: 4.6,
-      openingTimes: "12:00 PM - 12:00 AM",
-      contactNo: "+91 91234 56789",
-      image: "https://images.unsplash.com/photo-1765371512336-99c2b1c6975f?q=80&w=1133&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      name: "Coastal Flavors",
-      address: "Marine Drive, Mumbai",
-      city: "Mumbai",
-      cuisines: "Seafood, Konkan",
-      avgCost: "₹1000",
-      rating: 4.5,
-      openingTimes: "10:30 AM - 10:30 PM",
-      contactNo: "+91 99887 66554",
-      image: "https://images.unsplash.com/photo-1764818958908-d5efcec563d1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+const RestaurantpageUser = () => {
+  const { city } = useParams();
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true); // 👈 loading state
+  const [error, setError] = useState(null);     // 👈 error state
+
+  const restaurantData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "http://localhost:3000/api/resturantdatauser/data"
+      );
+
+      console.log("Restaurant data:", response.data);
+
+      const data =
+        response.data.foodRestaurantCardData || response.data || [];
+
+      const formatted = data.map((item) => ({
+        name: item.name,
+        address: item.address,
+        city: item.city,
+        cuisines: item.cuisineType?.join(", "),
+        avgCost: `₹${item.averageCostForTwo}`,
+        rating: item.rating,
+        openingTimes: item.openingTime,
+        contactNo: item.contactNumber,
+        image: item.imageUrl,
+      }));
+
+      setRestaurants(formatted);
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching restaurant data:", err);
+      setError("Failed to fetch restaurants. Please try again later.");
+    } finally {
+      setLoading(false);
     }
-  ]);
+  };
+
+  useEffect(() => {
+    restaurantData();
+  }, [city]);
+
+  // Filter restaurants by city param
+  const filteredRestaurants = restaurants.filter(
+    (res) => res.city?.toLowerCase() === city?.toLowerCase()
+  );
 
   return (
     <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 min-h-screen">
-      {/* Static Navbar */}
       <Navbar />
 
-      {/* Page Content */}
       <div className="px-6 py-12">
         <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-red-400 to-yellow-400 mb-12 text-center">
-          Top Restaurants
+          Top Restaurants in {city}
         </h1>
 
+        {/* Loading state */}
+        {loading && (
+          <p className="text-center text-gray-400">Fetching restaurants...</p>
+        )}
+
+        {/* Error state */}
+        {error && (
+          <p className="text-center text-red-400">{error}</p>
+        )}
+
+        {/* Fallback if no restaurants */}
+        {!loading && !error && filteredRestaurants.length === 0 && (
+          <p className="text-center text-gray-400">
+            No restaurants found in {city}.
+          </p>
+        )}
+
+        {/* Restaurant cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {restaurants.map((res, index) => (
+          {filteredRestaurants.map((res, index) => (
             <div
               key={index}
               className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
-              {/* Image with gradient overlay */}
               <div className="relative">
                 <img
                   src={res.image}
@@ -113,7 +97,6 @@ const RestaurantPage = () => {
                 </h2>
               </div>
 
-              {/* Details */}
               <div className="p-6 text-gray-200">
                 <p className="text-sm text-gray-400 mb-1">{res.address}</p>
                 <p className="text-sm text-gray-400 mb-1">City: {res.city}</p>
@@ -131,4 +114,4 @@ const RestaurantPage = () => {
   );
 };
 
-export default RestaurantPage;
+export default RestaurantpageUser;
